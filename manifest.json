@@ -3,13 +3,20 @@
     "name": "image text ai",
     "version": "1.0",
     "description": "Dynamically adds 'alt' text to images missing alt attributes.",
-    "permissions": [
-      "activeTab"
-    ],
+    "permissions": ["storage", "activeTab", "scripting"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_title": "Toggle Image Text AI"
+    },
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
-        "js": ["content.js"]
+        "js": ["content.js"],
+        "run_at": "document_idle"
       }
     ]
   }
+  
