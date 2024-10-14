@@ -14,6 +14,18 @@ function addAltTextToImages() {
     });
   }
   
+  // MutationObserver로 이미지 변화를 감지하고 alt 속성 추가
+  function observeForNewImages() {
+    const observer = new MutationObserver(() => {
+      addAltTextToImages();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+    });
+  }
+  
   // 확장 프로그램이 활성화되었는지 확인 후 실행
   chrome.storage.local.get(["extensionEnabled"], function (result) {
     if (result.extensionEnabled) {
