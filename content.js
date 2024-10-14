@@ -13,6 +13,11 @@ function getChineseAltText() {
   return "这是一张图片";
 }
 
+// 스페인어 alt 텍스트 반환 함수
+function getSpanishAltText() {
+  return "Esta es una imagen";
+}
+
 // 이미지에 alt 텍스트 추가 (처음 활성화 시)
 function addAltTextToImages(language) {
   const images = document.querySelectorAll("img");
@@ -27,6 +32,8 @@ function addAltTextToImages(language) {
         altValue = getKoreanAltText();
       } else if (language === "zh") {
         altValue = getChineseAltText();
+      } else if (language === "es") {
+        altValue = getSpanishAltText();
       }
       img.setAttribute("alt", altValue);
       img.setAttribute("data-alt-added", "true");
@@ -47,6 +54,8 @@ function updateAltTextForLanguage(language) {
       altValue = getKoreanAltText();
     } else if (language === "zh") {
       altValue = getChineseAltText();
+    } else if (language === "es") {
+      altValue = getSpanishAltText();
     }
     img.setAttribute("alt", altValue);
     console.log(`Alt text updated to '${altValue}' for image: ${img.src}`);

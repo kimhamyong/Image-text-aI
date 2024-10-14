@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const toggleSwitch = document.getElementById("toggleSwitch");
   const koButton = document.getElementById("ko");
   const enButton = document.getElementById("en");
-  const zhButton = document.getElementById("zh"); // 중국어 버튼 추가
+  const zhButton = document.getElementById("zh");
+  const esButton = document.getElementById("es");
 
   // 초기 스위치 상태를 스토리지에서 가져옴
   chrome.storage.local.get(["extensionEnabled", "language"], function (result) {
@@ -30,14 +31,19 @@ document.addEventListener("DOMContentLoaded", function () {
     setActiveLanguage("en");
   });
 
-  zhButton.addEventListener("click", function () { // 중국어 버튼 클릭 이벤트 추가
+  zhButton.addEventListener("click", function () {
     setActiveLanguage("zh");
+  });
+
+  esButton.addEventListener("click", function () { // 스페인어 버튼 클릭 이벤트 추가
+    setActiveLanguage("es");
   });
 
   function setActiveLanguage(language) {
     koButton.classList.toggle("active", language === "ko");
     enButton.classList.toggle("active", language === "en");
-    zhButton.classList.toggle("active", language === "zh"); // 중국어 버튼 활성화 처리
+    zhButton.classList.toggle("active", language === "zh");
+    esButton.classList.toggle("active", language === "es"); // 스페인어 버튼 활성화 처리
 
     chrome.storage.local.set({ language: language }, function () {
       console.log("Language set to:", language);
