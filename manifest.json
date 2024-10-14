@@ -9,7 +9,8 @@
     },
     "action": {
       "default_popup": "popup.html",
-      "default_title": "Toggle Image Text AI"
+      "default_title": "Image Text AI",
+      "default_icon": "/icons/logo.png"
     },
     "content_scripts": [
       {

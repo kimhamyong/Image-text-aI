@@ -1,23 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>image text ai</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Text AI</title>
     <style>
       body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 220px; /* 팝업 너비 */
+        height: 220px; /* 팝업 높이 */
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-align: center; /* 텍스트 가운데 정렬 */
       }
+
+      img {
+        width: 100px; /* 이미지 크기를 적절히 설정 */
+        height: auto; /* 비율 유지 */
+        margin-bottom: 20px; /* 이미지와 텍스트 사이 여백 */
+      }
+
+      .title {
+        font-size: 18px;
+        color: #666; /* 회색 글씨 */
+        margin-bottom: 20px; /* 텍스트와 토글 사이 여백 */
+      }
+
       .switch {
         position: relative;
         display: inline-block;
         width: 60px;
         height: 34px;
       }
+
       .switch input {
         opacity: 0;
         width: 0;
         height: 0;
       }
+
       .slider {
         position: absolute;
         cursor: pointer;
@@ -29,6 +55,7 @@
         transition: 0.4s;
         border-radius: 34px;
       }
+
       .slider:before {
         position: absolute;
         content: "";
@@ -40,18 +67,26 @@
         transition: 0.4s;
         border-radius: 50%;
       }
+
       input:checked + .slider {
-        background-color: #2196f3;
+        background-color: #fa0c8b;
       }
+
       input:checked + .slider:before {
         transform: translateX(26px);
       }
     </style>
   </head>
   <body>
-    <h1>image text ai</h1>
+    <!-- 이미지 추가 (여기에 이미지 추가해주세욤! manifest에도 추가해주세욤!) -->
+    <img src="/icons/logo.png" alt="Logo" />
+
+    <!-- 제목 추가 -->
+    <div class="title">Image Text AI</div>
+
+    <!-- 토글 스위치 -->
     <label class="switch">
-      <input type="checkbox" id="toggleSwitch">
+      <input type="checkbox" id="toggleSwitch" />
       <span class="slider"></span>
     </label>
 
