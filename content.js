@@ -1,11 +1,10 @@
-// 이미지에 alt 속성이 없거나 빈 문자열일 때만 "이미지입니다" 추가하고 추적용 data 속성 추가
 function addAltTextToImages() {
   const images = document.querySelectorAll("img");
 
   images.forEach((img) => {
     const altText = img.getAttribute("alt");
-    // alt 속성이 없거나 빈 문자열일 경우에만 alt 속성 추가
-    if (altText === null || altText === "") {
+    // alt 속성이 없을 경우에만 alt 속성 추가
+    if (altText === null) {
       img.setAttribute("alt", "이미지입니다");
       img.setAttribute("data-alt-added", "true");  // 추적용 속성 추가
       console.log(`Alt text added to image: ${img.src}`);
