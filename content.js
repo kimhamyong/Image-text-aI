@@ -1,12 +1,12 @@
-function addAltTextToImages() {
+function addAltTextToImages(language) {
   const images = document.querySelectorAll("img");
 
   images.forEach((img) => {
     const altText = img.getAttribute("alt");
-    // alt 속성이 없을 경우에만 alt 속성 추가
-    if (altText === null) {
-      img.setAttribute("alt", "이미지입니다");
-      img.setAttribute("data-alt-added", "true");  // 추적용 속성 추가
+    if (altText === null || altText === "") {
+      const altValue = language === "en" ? "This is an image" : "이미지입니다";
+      img.setAttribute("alt", altValue);
+      img.setAttribute("data-alt-added", "true");
       console.log(`Alt text added to image: ${img.src}`);
     }
   });
@@ -24,10 +24,10 @@ function removeAltTextFromImages() {
 }
 
 // MutationObserver로 이미지 변화를 감지하고 alt 속성 추가/제거
-function observeForNewImages(isEnabled) {
+function observeForNewImages(isEnabled, language) {
   const observer = new MutationObserver(() => {
     if (isEnabled) {
-      addAltTextToImages();
+      addAltTextToImages(language);
     } else {
       removeAltTextFromImages();
     }
@@ -38,34 +38,35 @@ function observeForNewImages(isEnabled) {
     subtree: true
   });
 
-  // 상태 변화 시 MutationObserver 해제하는 방법 필요
-  return observer;
+  return observer; // 상태 변화 시 MutationObserver 해제
 }
 
 // 확장 프로그램 상태에 따라 alt 속성 추가 또는 제거
-chrome.storage.local.get(["extensionEnabled"], function (result) {
+chrome.storage.local.get(["extensionEnabled", "language"], function (result) {
   const isEnabled = result.extensionEnabled;
+  const language = result.language || "ko";
 
   if (isEnabled) {
-    addAltTextToImages();
+    addAltTextToImages(language);
   } else {
     removeAltTextFromImages();
   }
 
-  // MutationObserver 시작
-  const observer = observeForNewImages(isEnabled);
+  const observer = observeForNewImages(isEnabled, language);
 
-  // 상태가 변경되면 observer를 통해 처리
   chrome.runtime.onMessage.addListener(function (message) {
     if (message.action === "toggleExtension") {
-      observer.disconnect(); // 기존 observer 해제
-      const newObserver = observeForNewImages(message.isEnabled); // 새 observer 시작
+      observer.disconnect();
+      const newObserver = observeForNewImages(message.isEnabled, language);
 
       if (message.isEnabled) {
-        addAltTextToImages();
+        addAltTextToImages(language);
       } else {
         removeAltTextFromImages();
       }
+    } else if (message.action === "changeLanguage") {
+      const newLanguage = message.language || "ko";
+      addAltTextToImages(newLanguage); // 새로운 언어 적용
     }
   });
 });

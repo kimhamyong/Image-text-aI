@@ -41,5 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chrome.storage.local.set({ language: language }, function () {
       console.log("Language set to:", language);
     });
+
+    chrome.runtime.sendMessage({ action: "changeLanguage", language: language });
   }
 });
