@@ -11,8 +11,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 220px; /* 팝업 너비 */
-        height: 220px; /* 팝업 높이 */
+        width: 250px; /* 팝업 너비 */
+        height: 250px; /* 팝업 높이 */
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -51,7 +51,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #ccc;
+        background-color: #b1b1b1;
         transition: 0.4s;
         border-radius: 34px;
       }
@@ -69,11 +69,28 @@
       }
 
       input:checked + .slider {
-        background-color: #fa0c8b;
+        background-color: #fccee7;
       }
 
       input:checked + .slider:before {
         transform: translateX(26px);
+      }
+
+      .language-switch {
+        display: flex;
+        align-items: center;
+        margin-top: 10px; /* 토글 스위치 아래 여백 */
+      }
+
+      .language {
+        cursor: pointer;
+        padding: 0 10px;
+        color: #b1b1b1; /* 기본 색상 */
+        transition: color 0.3s;
+      }
+
+      .language.active {
+        color: #000000; /* 활성화된 언어의 색상 */
       }
     </style>
   </head>
@@ -89,6 +106,12 @@
       <input type="checkbox" id="toggleSwitch" />
       <span class="slider"></span>
     </label>
+
+    <!-- 언어 선택 버튼 추가 -->
+    <div class="language-switch">
+      <span id="ko" class="language active">ko</span> |
+      <span id="en" class="language">en</span>
+    </div>
 
     <script src="popup.js"></script>
   </body>
