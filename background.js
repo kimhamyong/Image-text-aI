@@ -1,4 +1,4 @@
-// 확장 프로그램 상태를 받아 content.js 실행 여부 결정
+// background.js
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.action === "toggleExtension") {
     const isEnabled = message.isEnabled;
@@ -25,17 +25,17 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       });
       console.log("Extension disabled.");
     }
-  }
-});
+  } else if (message.action === "changeLanguage") {
+    const language = message.language;
 
-// 확장 프로그램이 처음 로드될 때 상태를 모든 탭에 반영
-chrome.storage.local.get(["extensionEnabled"], function (result) {
-  if (result.extensionEnabled) {
-    chrome.tabs.query({}, function (tabs) {
-      for (let tab of tabs) {
-        chrome.scripting.executeScript({
-          target: { tabId: tab.id },
-          files: ["content.js"]
+    // 확장 프로그램이 활성화된 경우에만
+    chrome.storage.local.get(["extensionEnabled"], function (result) {
+      if (result.extensionEnabled) {
+        // 모든 탭에 메시지를 보내서 언어 변경 처리
+        chrome.tabs.query({}, function (tabs) {
+          for (let tab of tabs) {
+            chrome.tabs.sendMessage(tab.id, { action: "changeLanguage", language: language });
+          }
         });
       }
     });

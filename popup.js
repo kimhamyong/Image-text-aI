@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("Extension enabled:", isEnabled);
     });
 
-    // background.js에 상태 전송
     chrome.runtime.sendMessage({ action: "toggleExtension", isEnabled: isEnabled });
   });
 
@@ -42,6 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log("Language set to:", language);
     });
 
-    chrome.runtime.sendMessage({ action: "changeLanguage", language: language });
+    // 언어 변경 메시지 전송
+    chrome.storage.local.get(["extensionEnabled"], function (result) {
+      if (result.extensionEnabled) {
+        chrome.runtime.sendMessage({ action: "changeLanguage", language: language });
+      }
+    });
   }
 });
