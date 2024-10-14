@@ -8,6 +8,11 @@ function getKoreanAltText() {
   return "이미지입니다";
 }
 
+// 중국어 alt 텍스트 반환 함수
+function getChineseAltText() {
+  return "这是一张图片";
+}
+
 // 이미지에 alt 텍스트 추가 (처음 활성화 시)
 function addAltTextToImages(language) {
   const images = document.querySelectorAll("img");
@@ -15,7 +20,14 @@ function addAltTextToImages(language) {
   images.forEach((img) => {
     const altText = img.getAttribute("alt");
     if (altText === null || altText === "") {
-      const altValue = language === "en" ? getEnglishAltText() : getKoreanAltText();
+      let altValue;
+      if (language === "en") {
+        altValue = getEnglishAltText();
+      } else if (language === "ko") {
+        altValue = getKoreanAltText();
+      } else if (language === "zh") {
+        altValue = getChineseAltText();
+      }
       img.setAttribute("alt", altValue);
       img.setAttribute("data-alt-added", "true");
       console.log(`Alt text added to image: ${img.src}`);
@@ -28,7 +40,14 @@ function updateAltTextForLanguage(language) {
   const images = document.querySelectorAll('img[data-alt-added="true"]');
 
   images.forEach((img) => {
-    const altValue = language === "en" ? getEnglishAltText() : getKoreanAltText();
+    let altValue;
+    if (language === "en") {
+      altValue = getEnglishAltText();
+    } else if (language === "ko") {
+      altValue = getKoreanAltText();
+    } else if (language === "zh") {
+      altValue = getChineseAltText();
+    }
     img.setAttribute("alt", altValue);
     console.log(`Alt text updated to '${altValue}' for image: ${img.src}`);
   });
