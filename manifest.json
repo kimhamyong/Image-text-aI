@@ -4,13 +4,14 @@
     "version": "1.0",
     "description": "Dynamically adds 'alt' text to images missing alt attributes.",
     "permissions": ["storage", "activeTab", "scripting"],
+    "host_permissions": ["*://*/*"],
     "background": {
       "service_worker": "background.js"
     },
     "action": {
       "default_popup": "popup.html",
       "default_title": "Image Text AI",
-      "default_icon": "/icons/logo.png"
+      "default_icon": "/icons/icons128.png"
     },
     "content_scripts": [
       {
