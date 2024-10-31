@@ -1,12 +1,14 @@
 // content.js
 
 // 언어별 프롬프트 설정
+// 언어별 프롬프트 설정
 const prompts = {
-  "ko": "해당 이미지에 대한 설명해줘.",
-  "en": "Please describe this image.",
-  "zh": "请描述这张图片。",
-  "es": "Por favor, describe esta imagen."
+  "ko": "홍길동(26세, 남성)은 시각장애를 가진 사회초년생이며 사무직에서 근무 중입니다. 그는 스크린 리더기를 통해 디지털 환경을 이용하며, 이미지나 그래픽 자료에 대체 텍스트가 제공되기를 원합니다. 다음 규칙을 참고하여 이미지에 대한 설명을 작성해 주세요:\n\n- 2줄 이내로 자세하게 설명\n- bullet 형식을 피하고 자연스러운 문장으로 작성\n- '이미지 설명:' 또는 '대체 텍스트:'로 시작하지 않고 이미지 자체를 설명\n- 사물 또는 인물의 위치를 명확하게 서술",
+  "en": "Hong Gildong, a 26-year-old male with visual impairment, works in an office environment as a novice employee. He uses screen readers to access digital content and prefers alternative text for images or graphics. Please write an image description following these rules:\n\n- Detailed, in no more than 2 sentences\n- Avoid bullet points; write in a natural sentence form\n- Do not start with 'Image description:' or 'Alt text:'; describe the image directly\n- Clearly state the position of objects or people in the image",
+  "zh": "洪吉东，26岁，男性，有视力障碍，初入职场，办公室职员，习惯使用屏幕阅读器来浏览数字内容，希望图片或图形包含替代文字。请遵循以下规则生成图像描述：\n\n- 不超过2句详细描述\n- 避免使用项目符号，采用自然句式\n- 不要以“图片描述:”或“替代文字:”开头，直接描述图像\n- 明确说明图像中物体或人物的位置",
+  "es": "Hong Gildong, un hombre de 26 años con discapacidad visual, trabaja en una oficina como empleado principiante. Utiliza lectores de pantalla para acceder al contenido digital y prefiere texto alternativo para imágenes o gráficos. Por favor, escribe una descripción de la imagen siguiendo estas reglas:\n\n- Descripción detallada en no más de 2 oraciones\n- Evita puntos de viñeta; usa una forma de oración natural\n- No comiences con 'Descripción de la imagen:' o 'Texto alternativo:'; describe directamente la imagen\n- Indica claramente la posición de los objetos o personas en la imagen"
 };
+
 
  // API 키 가져오기
  const apiKey = "${GEMINI_API_KEY}";;
