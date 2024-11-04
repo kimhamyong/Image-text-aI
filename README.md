@@ -20,7 +20,7 @@ To install ImageTextAI in your Chrome browser, follow these steps:
 
 1. **Clone the Repository**: Download the code from GitHub.
    ```bash
-   git clone https://github.com/your-repo/ImageTextAI.git
+   git clone https://github.com/kimhamyong/ImageTextAI.git
 2. **Load the Extension in Chrome**:
 
    Open Chrome and navigate to chrome://extensions/.
